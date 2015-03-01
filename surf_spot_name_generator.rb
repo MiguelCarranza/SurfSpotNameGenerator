@@ -61,8 +61,8 @@ class SurfSpotNameGenerator
   end
 
   def self.valid_spot_name?(name)
-    (SPOTS_DICT.include? name.first and
-     SPOTS_DICT[name.first].include? name)
+    (SPOTS_DICT.include? name.chr and
+     SPOTS_DICT[name.chr].include? name)
   end
 
   def self.build_id(spot_name, n)
@@ -70,9 +70,9 @@ class SurfSpotNameGenerator
   end
 
   def self.get_next_id_after(previous_spot, previous_n)
-    next_letter = (previous_spot.first == 'z') ? 'a' : previous_spot.first.next
+    next_letter = (previous_spot.chr == 'z') ? 'a' : previous_spot.chr.next
     next_letter = next_letter.next if next_letter == 'x'
-    spot_index = SPOTS_DICT[previous_spot.first].find_index previous_spot
+    spot_index = SPOTS_DICT[previous_spot.chr].find_index previous_spot
     spot_index = (spot_index + 1) % 2 if next_letter == 'a'
     next_n = (next_letter == 'a' and spot_index == 0) ? previous_n + 1 : previous_n
 
